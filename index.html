@@ -14,8 +14,7 @@
     <h1>QR Code Information</h1>
     <p><strong>Child's Name:</strong> <span id="child_name"></span></p>
     <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
-    <p><strong>Numbers:</strong> <span id="numbers"></span></p>
-    <p><strong>Names:</strong> <span id="names"></span></p>
+    <div id="pairs"></div>
     <p><strong>Surname:</strong> <span id="surname"></span></p>
     <p><strong>Allergies:</strong> <span id="allergies"></span></p>
     <p><strong>Password:</strong> <span id="password"></span></p>
@@ -29,8 +28,7 @@
             return {
                 child_name: params.get('child_name') || '',
                 dob: params.get('dob') || '',
-                numbers: params.get('numbers') || '',
-                names: params.get('names') || '',
+                pairs: JSON.parse(decodeURIComponent(params.get('pairs'))) || [],
                 surname: params.get('surname') || '',
                 allergies: params.get('allergies') || '',
                 password: params.get('password') || ''
@@ -41,8 +39,14 @@
             const params = getQueryParams();
             document.getElementById('child_name').innerText = params.child_name;
             document.getElementById('dob').innerText = params.dob;
-            document.getElementById('numbers').innerText = params.numbers;
-            document.getElementById('names').innerText = params.names;
+
+            const pairsDiv = document.getElementById('pairs');
+            params.pairs.forEach((pair, index) => {
+                const pairElement = document.createElement('p');
+                pairElement.innerHTML = `<strong>Number ${index + 1}:</strong> ${pair.number}, <strong>Name ${index + 1}:</strong> ${pair.name}`;
+                pairsDiv.appendChild(pairElement);
+            });
+
             document.getElementById('surname').innerText = params.surname;
             document.getElementById('allergies').innerText = params.allergies;
             document.getElementById('password').innerText = params.password;
@@ -52,4 +56,3 @@
     </script>
 </body>
 </html>
-
