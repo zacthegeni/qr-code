@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Information</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        p { font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>QR Code Information</h1>
+    <p><strong>Numbers:</strong> <span id="numbers"></span></p>
+    <p><strong>Names:</strong> <span id="names"></span></p>
+    <p><strong>Surname:</strong> <span id="surname"></span></p>
+    <p><strong>Allergies:</strong> <span id="allergies"></span></p>
+    <p><strong>Password:</strong> <span id="password"></span></p>
+
+    <h2>Privacy Notice</h2>
+    <p>This page collects and displays personal information for the purpose of demonstrating QR code functionality. By scanning the QR code, you consent to the collection and use of this data as described. Your data will be stored securely and you have the right to access and request the deletion of your data at any time.</p>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                numbers: params.get('numbers') || '',
+                names: params.get('names') || '',
+                surname: params.get('surname') || '',
+                allergies: params.get('allergies') || '',
+                password: params.get('password') || ''
+            };
+        }
+
+        function displayInformation() {
+            const params = getQueryParams();
+            document.getElementById('numbers').innerText = params.numbers;
+            document.getElementById('names').innerText = params.names;
+            document.getElementById('surname').innerText = params.surname;
+            document.getElementById('allergies').innerText = params.allergies;
+            document.getElementById('password').innerText = params.password;
+        }
+
+        displayInformation();
+    </script>
+</body>
+</html>
