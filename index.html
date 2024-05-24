@@ -41,9 +41,9 @@
 
             const contactsDiv = document.getElementById('contacts');
             const contacts = params.contacts.split(', ');
-            contacts.forEach((contact, index) => {
+            contacts.forEach(contact => {
                 const contactElement = document.createElement('p');
-                contactElement.innerText = `Contact ${index + 1}: ${contact}`;
+                contactElement.innerText = contact;
                 contactsDiv.appendChild(contactElement);
             });
 
