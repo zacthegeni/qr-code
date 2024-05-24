@@ -14,7 +14,8 @@
     <h1>QR Code Information</h1>
     <p><strong>Child's Name:</strong> <span id="child_name"></span></p>
     <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
-    <p><strong>Contacts:</strong> <span id="contacts"></span></p>
+    <p><strong>Contacts:</strong></p>
+    <div id="contacts"></div>
     <p><strong>Allergies:</strong> <span id="allergies"></span></p>
     <p><strong>Password:</strong> <span id="password"></span></p>
 
@@ -37,7 +38,15 @@
             const params = getQueryParams();
             document.getElementById('child_name').innerText = params.child_name;
             document.getElementById('dob').innerText = params.dob;
-            document.getElementById('contacts').innerText = params.contacts;
+
+            const contactsDiv = document.getElementById('contacts');
+            const contacts = params.contacts.split(', ');
+            contacts.forEach((contact, index) => {
+                const contactElement = document.createElement('p');
+                contactElement.innerText = `Contact ${index + 1}: ${contact}`;
+                contactsDiv.appendChild(contactElement);
+            });
+
             document.getElementById('allergies').innerText = params.allergies;
             document.getElementById('password').innerText = params.password;
         }
